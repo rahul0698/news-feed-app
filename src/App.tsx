@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import {Route, Switch, Redirect} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import Login from './containers/auth/login';
+import {connect} from "react-redux";
+import Feeds from './containers/feeds/feeds';
+import Header from './components/header/header';
+
+interface IProps {
+    isAuthenticated: boolean
 }
 
-export default App;
+class App extends Component<IProps> {
+    constructor(props: any) {
+        super(props);
+    }
+    render() {
+        let routes = (
+            <Switch>
+                <Route path="/Auth" component={Login}/>
+                <Redirect to='/Auth'/>
+            </Switch>
+        );
+
+        if(this.props.isAuthenticated) {
+            routes = (
+                <Switch>
+                    <Route path="/Feeds" component={Feeds}/>
+                    <Redirect to='/Feeds'/>
+                </Switch>
+            )
+        }
+        return (
+            <div className="App">
+                {this.props.isAuthenticated && <Header isAuthenticated={this.props.isAuthenticated}/>}
+                {routes}
+            </div>
+        );
+    }
+}
+
+const mapStateToProps = (state: any) => {
+    return {
+        isAuthenticated: state.auth.isLoggedIn
+    };
+};
+
+export default connect(mapStateToProps)(App);

@@ -1,0 +1,47 @@
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #b5b3b3;
+    height: 100vh;
+    min-height: 768px;
+}
+
+.login-container {
+    width: 650px;
+    height: 400px;
+    background: #f3f3f3;
+    border: 1px solid #cccbcb;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px #908a8a;
+    padding: 35px 0;
+}
+
+.login-container h2 {
+    color: #424242;
+}
+
+.login-button {
+    height: 55px;
+    width: 150px;
+    font-size: 18px;
+    background: turquoise;
+    color: white;
+    font-weight: bold;
+    font-family: "arial";
+    border: 1px solid #65d8cc;
+    outline: none;
+    cursor: pointer;
+}
+
+.account-help-links {
+    margin-top: 20px;
+}
+
+.account-help-links p {
+    line-height: 1.5rem;
+}
+
+.user-status-query {
+    font-size: 14px;
+}
